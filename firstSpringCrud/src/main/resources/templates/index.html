@@ -1,11 +1,76 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title th:text=${title}></title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title th:text=${title}></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Form</h1>
- 
+	<h1>Form Inserir</h1>
+
+	<form action="#" th:action="@{/api/add}" th:object="${user}"
+		method="post">
+
+		<label>Login</label> <input type="text" th:field="*{username}" /> <br>
+		<label>Password</label> <input type="text" th:field="*{password}" />
+		<br> <label>Email</label> <input type="text" th:field="*{email}" />
+		<br> <input type="submit" value="Cadastrar" />
+
+	</form>
+
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Username</th>
+				<th>Password</th>
+				<th>Email</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="user : ${users}">
+				<td th:text="${user.id}"></td>
+				<td th:text="${user.username}"></td>
+				<td th:text="${user.password}"></td>
+				<td th:text="${user.email}"></td>
+				<td>
+					<form action="#" th:method="POST" th:action="@{/update}"
+						th:object="${userUpdate}">
+						<input type="hidden" th:value="${user.id}" id="id" name="id"/>
+						<input type="hidden" th:value="${user.username}" id="username" name="username"/>
+						<input type="hidden" th:value="${user.password}" id="password" name="password"/>
+						<input type="hidden" th:value="${user.email}" id="email" name="email"/>
+						<button th:id="'btn_update_' + ${user.id}" type="submit">Update</button>
+					</form>
+
+				</td>
+				<td>
+					<form action="#" th:method="DELETE" th:action="@{/api/delete}"
+						th:object="${userDelete}">
+						<input type="hidden" th:value="${user.id}" id="id" name="id"/>
+						<button th:id="'btn_delete_' + ${user.id}" type="submit">Delete</button>
+					</form>
+				
+				</td>
+
+			</tr>
+
+		</tbody>
+
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

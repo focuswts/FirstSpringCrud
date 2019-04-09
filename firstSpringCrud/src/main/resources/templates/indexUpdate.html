@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title th:text=${title}></title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+
+	<h1>Form Atualizar</h1>
+
+	<form action="#" th:action="@{/api/update}" th:object="${userUpdate}"
+		th:method="PUT">
+		
+		<label>ID</label>
+		<input type="text" th:field="*{id}" id="id" name="id" readonly="readonly">
+		<br>
+		<label >Login</label>
+		<input type="text" th:field="*{username}" /> 
+		<br>
+		<label>Password</label>
+		<input type="text"	th:field="*{password}" /> 
+		<br>
+		<label>Email</label>
+		<input type="text" th:field="*{email}" />
+		<br>
+		<input type="submit" value="Atualizar Usuário"/>
+	
+
+
+	</form>
+
+
+
+</body>
+</html>
